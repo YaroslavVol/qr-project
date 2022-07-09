@@ -17,8 +17,9 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue';
 import { QrStream } from 'vue3-qr-reader';
+import axios, { Axios } from 'axios';
 export default defineComponent({
-  name: 'QrStreamExample',
+  // name: 'QrStreamExample',
   components: {
     QrStream
   },
@@ -27,7 +28,15 @@ export default defineComponent({
       data: null
     })
     function onDecode(data) {
-      state.data = data
+      state.data = data,
+      axios.post('/api/qr', {
+        token: data
+      }).then(function (response) {
+      console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
     return {
       ...toRefs(state),
