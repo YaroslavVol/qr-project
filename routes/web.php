@@ -15,6 +15,8 @@ use Inertia\Inertia;
 |
 */
 
+// Route Vue
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -42,3 +44,8 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+// Api route
+
+// Route::get('/api/qr', [QrController::class, 'show']);
+
