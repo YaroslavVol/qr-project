@@ -18,11 +18,7 @@ class QrController extends Controller
      */
     public function index()
     {
-        //
-        // return QrResource::collection(Qr::get());
-
         $qr_token = DB::table('qrs')->pluck('token');
-
         return $qr_token;
     }
 
@@ -35,19 +31,16 @@ class QrController extends Controller
     public function store(Request $request)
     {
         $name = $request->input('token');
-
         $qr_token = DB::table('qrs')->where('token', $name)->where('confirmed', 0)->count();
 
         if ($qr_token == 1) {
-
             DB::table('qrs')->where('token', $name)->update(['confirmed' => 1]);
-            
-            return "true";
+            return response('Правильный QR код', 200)
+            ->header('Content-Type', 'text/plain');;
         } else {
-            return "false";
+            return response('Неправильный QR код', 200)
+            ->header('Content-Type', 'text/plain');;
         }
-        
-
     }
 
     /**

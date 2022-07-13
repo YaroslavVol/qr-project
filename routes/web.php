@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\GenerateQrCodeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +17,12 @@ use Inertia\Inertia;
 |
 */
 
-// Route Vue
+Route::get('qrcode', [GenerateQrCodeController::class, 'generate'])->name('generate');
+Route::get('qrcode/{id}', [GenerateQrCodeController::class, 'generateId'])->name('generate');
+
+Route::get('/home', function () {
+    return view('home');
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -26,8 +33,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/test', function () {
-    return Inertia::render('Test', [
+Route::get('/qr', function () {
+    return Inertia::render('QrScaner', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -44,8 +51,3 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
-
-// Api route
-
-// Route::get('/api/qr', [QrController::class, 'show']);
-

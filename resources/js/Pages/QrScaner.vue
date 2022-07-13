@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb">
-      Qr Stream
+      Qr Сканер
     </div>
     <div class="center stream">
       <qr-stream @decode="onDecode" class="mb">
@@ -9,8 +9,11 @@
       </qr-stream>
     </div>
     <div class="result">
-      Result: {{data}}
+      Результат: {{info}}
     </div>
+    <!-- <div class="result">
+      Result QR token: {{data}}
+    </div> -->
   </div>
 </template>
 
@@ -18,21 +21,25 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import { QrStream } from 'vue3-qr-reader';
 import axios, { Axios } from 'axios';
+
+import { ref } from "vue";
 export default defineComponent({
-  // name: 'QrStreamExample',
   components: {
     QrStream
   },
   setup() {
+  const info = ref()
     const state = reactive({
-      data: null
+      data: null,
+      info: ''
     })
-    function onDecode(data) {
+      function onDecode(data) {
       state.data = data,
       axios.post('/api/qr', {
         token: data
-      }).then(function (response) {
-      console.log(response);
+      }).then(response => {
+        info.value = response.data
+        console.log(response.data)
       })
       .catch(function (error) {
         console.log(error);
@@ -40,7 +47,8 @@ export default defineComponent({
     }
     return {
       ...toRefs(state),
-      onDecode
+      onDecode, 
+      info
     }
   }
 });
