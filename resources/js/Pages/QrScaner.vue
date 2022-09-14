@@ -18,8 +18,8 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import { QrStream } from 'vue3-qr-reader';
 import axios, { Axios } from 'axios';
-
 import { ref } from "vue";
+
 export default defineComponent({
   components: {
     QrStream

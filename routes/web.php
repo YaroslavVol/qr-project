@@ -17,11 +17,8 @@ use App\Http\Controllers\GenerateQrCodeController;
 |
 */
 
-Route::get('qrcode', [GenerateQrCodeController::class, 'generate'])->name('generate');
-Route::get('qrcode/{id}', [GenerateQrCodeController::class, 'generateId'])->name('generate');
-
-Route::get('/home', function () {
-    return view('home');
+Route::get('/qr-generate', function () {
+    return Inertia::render('QrGenerate');
 });
 
 Route::get('/', function () {

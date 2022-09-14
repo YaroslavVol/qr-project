@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\QrController;
+use App\Http\Controllers\Api\QrGenerateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resources([
     'qr' => QrController::class,
+
+    'qr-generate' => QrGenerateController::class,
 ]);
