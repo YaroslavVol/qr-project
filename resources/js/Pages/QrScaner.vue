@@ -11,9 +11,6 @@
     <div class="result">
       Результат: {{info}}
     </div>
-    <!-- <div class="result">
-      Result QR token: {{data}}
-    </div> -->
   </div>
 </template>
 
